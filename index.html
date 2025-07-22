@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Chat Support</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+        
+        .chat-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .chat-header {
+            background-color: #6c757d;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .back-btn {
+            position: absolute;
+            left: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        
+        .chat-logo {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        
+        .chat-messages {
+            height: 400px;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+        
+        .message {
+            max-width: 80%;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 18px;
+            line-height: 1.4;
+            position: relative;
+            word-wrap: break-word;
+        }
+        
+        .incoming {
+            background-color: white;
+            border: 1px solid #e5e5ea;
+            margin-right: auto;
+        }
+        
+        .outgoing {
+            background-color: #E3F2FD;
+            color: #333;
+            margin-left: auto;
+            border: 1px solid #BBDEFB;
+        }
+        
+        .chat-input-area {
+            display: flex;
+            padding: 10px;
+            background-color: #f0f0f0;
+            align-items: center;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+            font-size: 14px;
+            margin: 0 8px;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #6c757d;
+            background-color: white;
+            border: none;
+            font-size: 18px;
+        }
+        
+        .send-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .preview-image {
+            max-width: 200px;
+            max-height: 150px;
+            border-radius: 8px;
+            margin-top: 5px;
+            display: block;
+        }
+        
+        .timestamp {
+            font-size: 11px;
+            color: #777;
+            margin-top: 4px;
+            text-align: right;
+        }
+        
+        .image-message {
+            font-size: 12px;
+            color: #555;
+            margin-top: 5px;
+        }
+        
+        .user-form {
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+        }
+        
+        .radio-option input {
+            margin-right: 5px;
+        }
+        
+        .submit-btn {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+        }
+        
+        .user-info {
+            font-size: 12px;
+            color: #777;
+            margin-top: 5px;
+            text-align: right;
+            font-style: italic;
+        }
+        
+        .loan-form {
+            padding: 20px;
+            background-color: #f9f9f9;
+            display: none;
+        }
+        
+        .complaint-form {
+            padding: 20px;
+            background-color: #f9f9f9;
+            display: none;
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .nav-btn {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        select.form-control {
+            height: 40px;
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <button class="back-btn" id="back-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </button>
+            <svg class="chat-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-8 12H9v-2h2v2zm0-4H9V7h2v4z"/>
+            </svg>
+            Live Chat Support
+        </div>
+        
+        <!-- Form kategori awal -->
+        <div class="user-form" id="category-form">
+            <h3 class="form-title">Pilih Jenis Layanan</h3>
+            <div class="form-group">
+                <label>Kategori</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="category-umum" name="category" value="umum" checked>
+                        <label for="category-umum">Pengaduan Umum</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="category-siswa" name="category" value="siswa">
+                        <label for="category-siswa">Pengaduan Siswa</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="category-peminjaman" name="category" value="peminjaman">
+                        <label for="category-peminjaman">Peminjaman Fasilitas</label>
+                    </div> 
+                </div>
+            </div>
+            <button class="submit-btn" id="next-btn">Selanjutnya</button>
+        </div>
+        
+        <!-- Form untuk pengaduan umum -->
+        <div class="complaint-form" id="complaint-form">
+            <h3 class="form-title">Form Pengaduan</h3>
+            <div class="form-group">
+                <label for="user-name">Nama Lengkap</label>
+                <input type="text" id="user-name" class="form-control" placeholder="Masukkan nama Anda" required>
+            </div>
+            <div class="form-group">
+                <label for="complaint-detail">Detail Pengaduan</label>
+                <textarea id="complaint-detail" class="form-control" rows="4" placeholder="Jelaskan pengaduan Anda secara detail" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="complaint-location">Lokasi</label>
+                <input type="text" id="complaint-location" class="form-control" placeholder="Lokasi kejadian" required>
+            </div>
+            <div class="form-navigation">
+                <button class="nav-btn" id="back-to-category">Kembali</button>
+                <button class="submit-btn" id="submit-complaint">Kirim Pengaduan</button>
+            </div>
+        </div>
+        
+        <!-- Form untuk peminjaman fasilitas -->
+        <div class="loan-form" id="loan-form">
+            <h3 class="form-title">Form Peminjaman Fasilitas</h3>
+            <div class="form-group">
+                <label for="loan-name">Nama Lengkap</label>
+                <input type="text" id="loan-name" class="form-control" placeholder="Masukkan nama Anda" required>
+            </div>
+            <div class="form-group">
+                <label for="loan-facility">Fasilitas yang Dipinjam</label>
+                <select id="loan-facility" class="form-control" required>
+                    <option value="">Pilih fasilitas</option>
+                    <option value="ruang_kelas">Ruang Kelas</option>
+                    <option value="bahan_ajar">bahan ajar </option>
+                    <option value="elektronik">elektronik</option>
+                    <option value="perabotan">perabotan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="loan-date">Tanggal Peminjaman</label>
+                <input type="date" id="loan-date" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="loan-time">Waktu Peminjaman</label>
+                <input type="time" id="loan-time" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="loan-purpose">Tujuan Peminjaman</label>
+                <textarea id="loan-purpose" class="form-control" rows="3" placeholder="Tujuan penggunaan fasilitas" required></textarea>
+            </div>
+            <div class="form-navigation">
+                <button class="nav-btn" id="back-to-category-loan">Kembali</button>
+                <button class="submit-btn" id="submit-loan">Ajukan Peminjaman</button>
+            </div>
+        </div>
+        
+        <div class="chat-messages" id="chat-messages">
+            <div class="message incoming">
+                Hello! Selamat datang di layanan pengaduan dan peminjaman sarana prasarana.
+                <div class="timestamp">Baru saja</div>
+            </div>
+        </div>
+        
+        <div class="chat-input-area" id="chat-input-area" style="display: none;">
+            <label for="file-upload" class="icon-btn" title="Attach image">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#4285F4">
+                    <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4.86 8.86l-3 3.87L9 13.14 6 17h12l-3.86-5.14z"/>
+                </svg>
+            </label>
+            <input type="file" id="file-upload" class="file-input" accept="image/*">
+            <input type="text" class="chat-input" id="message-input" placeholder="Ketik pesan Anda...">
+            <button class="icon-btn send-btn" id="send-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const messageInput = document.getElementById('message-input');
+            const sendBtn = document.getElementById('send-btn');
+            const chatMessages = document.getElementById('chat-messages');
+            const fileUpload = document.getElementById('file-upload');
+            const categoryForm = document.getElementById('category-form');
+            const complaintForm = document.getElementById('complaint-form');
+            const loanForm = document.getElementById('loan-form');
+            const chatInputArea = document.getElementById('chat-input-area');
+            const nextBtn = document.getElementById('next-btn');
+            const backToCategoryBtn = document.getElementById('back-to-category');
+            const backToCategoryLoanBtn = document.getElementById('back-to-category-loan');
+            const submitComplaintBtn = document.getElementById('submit-complaint');
+            const submitLoanBtn = document.getElementById('submit-loan');
+            const backBtn = document.getElementById('back-btn');
+            const categoryInputs = document.querySelectorAll('input[name="category"]');
+            
+            let userInfo = {
+                name: '',
+                category: '',
+                formData: {}
+            };
+            
+            // Nomor WhatsApp tujuan
+            const whatsappNumber = "6285230973290";
+            
+            // Fungsi untuk mendapatkan waktu sekarang
+            function getCurrentTime() {
+                const now = new Date();
+                return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+            
+            // Fungsi untuk menampilkan pesan
+            function displayMessage(content, isOutgoing = false, isImage = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${isOutgoing ? 'outgoing' : 'incoming'}`;
+                
+                if (isImage) {
+                    const img = document.createElement('img');
+                    img.src = content;
+                    img.className = 'preview-image';
+                    messageDiv.appendChild(img);
+                    
+                    const caption = document.createElement('div');
+                    caption.className = 'image-message';
+                    caption.textContent = 'Gambar terkirim';
+                    messageDiv.appendChild(caption);
+                } else {
+                    messageDiv.textContent = content;
+                }
+                
+                // Tambahkan info pengguna untuk pesan keluar
+                if (isOutgoing) {
+                    const userInfoDiv = document.createElement('div');
+                    userInfoDiv.className = 'user-info';
+                    userInfoDiv.textContent = `${userInfo.name} (${userInfo.category})`;
+                    messageDiv.appendChild(userInfoDiv);
+                }
+                
+                const timeDiv = document.createElement('div');
+                timeDiv.className = 'timestamp';
+                timeDiv.textContent = getCurrentTime();
+                messageDiv.appendChild(timeDiv);
+                
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            // Fungsi untuk mengirim ke WhatsApp
+            function sendToWhatsApp(message, imageData = null) {
+                let url = `https://wa.me/6285230873290?`;
+                
+                // Format pesan berdasarkan kategori
+                let fullMessage;
+                if (userInfo.category === 'peminjaman') {
+                    fullMessage = `[PEMINJAMAN FASILITAS]\n`;
+                    fullMessage += `Nama: ${userInfo.name}\n`;
+                    fullMessage += `Fasilitas: ${userInfo.formData.facility}\n`;
+                    fullMessage += `Tanggal: ${userInfo.formData.date}\n`;
+                    fullMessage += `Waktu: ${userInfo.formData.time}\n`;
+                    fullMessage += `Tujuan: ${userInfo.formData.purpose}\n`;
+                    fullMessage += `Pesan Tambahan: ${message}`;
+                } else {
+                    fullMessage = `[PENGADUAN - ${userInfo.category.toUpperCase()}]\n`;
+                    fullMessage += `Nama: ${userInfo.name}\n`;
+                    fullMessage += `Lokasi: ${userInfo.formData.location}\n`;
+                    fullMessage += `Detail: ${userInfo.formData.detail}\n`;
+                    fullMessage += `Pesan Tambahan: ${message}`;
+                }
+                
+                if (imageData) {
+                    url += `text=${encodeURIComponent("Saya mengirim gambar ini: " + fullMessage)}`;
+                } else {
+                    url += `text=${encodeURIComponent(fullMessage)}`;
+                }
+                
+                window.open(url, '_blank');
+            }
+            
+            // Fungsi untuk kembali ke halaman sebelumnya
+            function goBack() {
+                // Jika sedang di form pengaduan, kembali ke kategori
+                if (complaintForm.style.display === 'block') {
+                    complaintForm.style.display = 'none';
+                    categoryForm.style.display = 'block';
+                    return;
+                }
+                
+                // Jika sedang di form peminjaman, kembali ke kategori
+                if (loanForm.style.display === 'block') {
+                    loanForm.style.display = 'none';
+                    categoryForm.style.display = 'block';
+                    return;
+                }
+                
+                // Jika sedang di chat, kembali ke kategori
+                if (chatInputArea.style.display === 'flex') {
+                    chatInputArea.style.display = 'none';
+                    categoryForm.style.display = 'block';
+                    // Kosongkan chat messages kecuali pesan awal
+                    while (chatMessages.children.length > 1) {
+                        chatMessages.removeChild(chatMessages.lastChild);
+                    }
+                    return;
+                }
+                
+                // Jika sedang di kategori, kembali ke halaman sebelumnya
+                if (categoryForm.style.display === 'block') {
+                    window.location.href = 'sim.html';
+                }
+            }
+            
+            // Event listener untuk tombol kembali
+            backBtn.addEventListener('click', goBack);
+            backToCategoryBtn.addEventListener('click', goBack);
+            backToCategoryLoanBtn.addEventListener('click', goBack);
+            
+            // Event listener untuk tombol send
+            sendBtn.addEventListener('click', function() {
+                const message = messageInput.value.trim();
+                if (message) {
+                    displayMessage(message, true);
+                    sendToWhatsApp(message);
+                    messageInput.value = '';
+                }
+            });
+            
+            // Handle file upload
+            fileUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file && file.type.match('image.*')) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        displayMessage(event.target.result, true, true);
+                        sendToWhatsApp("Saya mengirim gambar ini", event.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Juga bekerja dengan tombol Enter
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendBtn.click();
+                }
+            });
+            
+            // Tombol Selanjutnya di form kategori
+            nextBtn.addEventListener('click', function() {
+                // Get selected category
+                let selectedCategory = 'umum';
+                categoryInputs.forEach(input => {
+                    if (input.checked) {
+                        selectedCategory = input.value;
+                    }
+                });
+                
+                userInfo.category = selectedCategory;
+                
+                // Tampilkan form yang sesuai
+                if (selectedCategory === 'peminjaman') {
+                    categoryForm.style.display = 'none';
+                    loanForm.style.display = 'block';
+                } else {
+                    categoryForm.style.display = 'none';
+                    complaintForm.style.display = 'block';
+                }
+            });
+            
+            // Submit form pengaduan
+            submitComplaintBtn.addEventListener('click', function() {
+                const name = document.getElementById('user-name').value.trim();
+                const detail = document.getElementById('complaint-detail').value.trim();
+                const location = document.getElementById('complaint-location').value.trim();
+                
+                if (!name || !detail || !location) {
+                    alert('Harap lengkapi semua field');
+                    return;
+                }
+                
+                userInfo.name = name;
+                userInfo.formData = {
+                    detail: detail,
+                    location: location
+                };
+                
+                complaintForm.style.display = 'none';
+                chatInputArea.style.display = 'flex';
+                
+                // Pesan otomatis dari "admin"
+                setTimeout(() => {
+                    displayMessage("Terima kasih telah mengisi form pengaduan. Silahkan tambahkan informasi lain jika diperlukan.", false);
+                }, 500);
+            });
+            
+            // Submit form peminjaman
+            submitLoanBtn.addEventListener('click', function() {
+                const name = document.getElementById('loan-name').value.trim();
+                const facility = document.getElementById('loan-facility').value;
+                const date = document.getElementById('loan-date').value;
+                const time = document.getElementById('loan-time').value;
+                const purpose = document.getElementById('loan-purpose').value.trim();
+                
+                if (!name || !facility || !date || !time || !purpose) {
+                    alert('Harap lengkapi semua field');
+                    return;
+                }
+                
+                userInfo.name = name;
+                userInfo.formData = {
+                    facility: document.getElementById('loan-facility').options[document.getElementById('loan-facility').selectedIndex].text,
+                    date: date,
+                    time: time,
+                    purpose: purpose
+                };
+                
+                loanForm.style.display = 'none';
+                chatInputArea.style.display = 'flex';
+                
+                // Pesan otomatis dari "admin"
+                setTimeout(() => {
+                    displayMessage("Terima kasih telah mengisi form peminjaman. Silahkan tambahkan informasi lain jika diperlukan.", false);
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIM Sarana Prasarana Bimbel</title>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4fc3f7;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 1.5rem;
+        }
+
+        .sidebar {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .sidebar ul li a {
+            color: var(--dark-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+
+        .sidebar ul li a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar ul li a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .main-content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .page-header h2 {
+            color: var(--secondary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        table th, table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        table th {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+
+        table tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .badge-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            transition: border-color 0.15s;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(79, 195, 247, 0.25);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+            overflow-y: auto;
+        }
+
+        .modal-dialog {
+            max-width: 600px;
+            margin: 1.75rem auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            padding: 1rem;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h5 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .modal-body {
+            padding: 1rem;
+        }
+
+        .modal-footer {
+            padding: 1rem;
+            border-top: 1px solid #dee2e6;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .close {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: #000;
+            opacity: 0.5;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            opacity: 0.75;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1rem 1.5rem;
+            background-color: var(--light-color);
+            border-bottom: 1px solid #eee;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: #6c757d;
+            font-size: 0.875rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-item input {
+            margin-right: 0.5rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .facility-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .facility-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .facility-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .facility-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .facility-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .facility-info {
+            padding: 1rem;
+        }
+
+        .facility-info h4 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .facility-info p {
+            color: #6c757d;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .facility-status {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-baik {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-perbaikan {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-rusak {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        @media (max-width: 992px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .facility-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .facility-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo Bimbel">
+            <h1>SIM Sarana Prasarana Bimbel Uciha Clan</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" id="navLiveChat"><i class="fas fa-comment-dots"></i> Live Chat</a></li>
+                <li><a href="sim.html" id="navKeluar"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="dashboard">
+            <div class="sidebar">
+                <h3>Menu</h3>
+                <ul>
+                    <li><a href="sim.html" id="menuDashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="kelas.html" id="menuRuang"><i class="fas fa-building"></i> Ruang Kelas</a></li>
+                    <li><a href="perabotan.html" id="menuPerabotan"><i class="fas fa-chair"></i> Perabotan</a></li>
+                    <li><a href="elektronik.html" id="menuElektronik" class="active"><i class="fas fa-laptop"></i> Peralatan Elektronik</a></li>
+                    <li><a href="bahanajar.html" id="menuBahanAjar"><i class="fas fa-book"></i> Bahan Ajar</a></li>
+                </ul>
+            </div>
+
+            <div class="main-content">
+                <!-- Peralatan Elektronik Content -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-laptop"></i> Daftar Peralatan Elektronik Bimbel Uciha Clan
+                    </div>
+                    <div class="card-body">
+                        <div class="facility-gallery">
+                            <!-- Proyektor -->
+                            <div class="facility-item">
+                                <img src="epson.jpg" alt="Proyektor" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Proyektor Epson</h4>
+                                    <p>Proyektor HD 1080p dengan brightness 4000 lumens. Terhubung dengan sistem audio kelas. Total 12 unit.</p>
+                                    <span class="facility-status status-baik">Kondisi: 92% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- AC Split -->
+                            <div class="facility-item">
+                                <img src="ac.webp" alt="AC Split" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>AC Split Daikin</h4>
+                                    <p>AC 2 PK inverter dengan filter anti bakteri. Kapasitas pendinginan untuk ruang 30m². Total 15 unit.</p>
+                                    <span class="facility-status status-perbaikan">Kondisi: 80% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Laptop -->
+                            <div class="facility-item">
+                                <img src="asus.avif" alt="Laptop" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Laptop Instruktur</h4>
+                                    <p>Laptop ASUS Core i7 16GB RAM untuk pengajaran. Dilengkapi software edukasi terbaru. Total 10 unit.</p>
+                                    <span class="facility-status status-baik">Kondisi: 95% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Komputer Siswa -->
+                            <div class="facility-item">
+                                <img src="komputer.png" alt="Komputer Siswa" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Komputer Siswa</h4>
+                                    <p>PC All-in-One Intel Core i5 untuk lab komputer. Monitor 21.5" touchscreen. Total 25 unit.</p>
+                                    <span class="facility-status status-perbaikan">Kondisi: 75% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Printer -->
+                            <div class="facility-item">
+                                <img src="printer.png" alt="Printer" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Printer LaserJet</h4>
+                                    <p>Printer HP LaserJet warna A4 dengan kecepatan 30ppm. Untuk kebutuhan administrasi. Total 3 unit.</p>
+                                    <span class="facility-status status-rusak">Kondisi: 60% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Sound System -->
+                            <div class="facility-item">
+                                <img src="sound.png" alt="Sound System" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Sound System</h4>
+                                    <p>Sistem audio profesional dengan mixer 8 channel. Untuk ruang seminar dan acara. Total 2 set.</p>
+                                    <span class="facility-status status-baik">Kondisi: 90% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Smart TV -->
+                            <div class="facility-item">
+                                <img src="smart-tv.jpg" alt="Smart TV" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Smart TV 55"</h4>
+                                    <p>TV Android 4K untuk presentasi dan media pembelajaran. Terpasang di ruang tunggu dan lobby. Total 3 unit.</p>
+                                    <span class="facility-status status-baik">Kondisi: 100% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Tablet -->
+                            <div class="facility-item">
+                                <img src="tablet.jpg" alt="Tablet" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Tablet Pembelajaran</h4>
+                                    <p>iPad 10.2" dengan aplikasi edukasi khusus. Untuk kelas interaktif. Total 30 unit.</p>
+                                    <span class="facility-status status-perbaikan">Kondisi: 85% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Mikroskop Digital -->
+                            <div class="facility-item">
+                                <img src="mikroskop.jpg" alt="Mikroskop Digital" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Mikroskop Digital</h4>
+                                    <p>Mikroskop dengan kamera 5MP dan koneksi USB. Untuk praktikum biologi. Total 5 unit.</p>
+                                    <span class="facility-status status-baik">Kondisi: 100% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Scanner -->
+                            <div class="facility-item">
+                                <img src="scanner.jpg" alt="Scanner" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Scanner Dokumen</h4>
+                                    <p>Scanner ADF kecepatan tinggi untuk digitalisasi bahan ajar. Kapasitas 50 lembar per menit. Total 2 unit.</p>
+                                    <span class="facility-status status-baik">Kondisi: 95% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Router -->
+                            <div class="facility-item">
+                                <img src="router.jpg" alt="Router" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Router WiFi</h4>
+                                    <p>Router dual-band AC2100 dengan coverage seluruh area bimbel. Dilengkapi firewall. Total 5 unit.</p>
+                                    <span class="facility-status status-perbaikan">Kondisi: 70% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Kamera -->
+                            <div class="facility-item">
+                                <img src="kamera.jpg" alt="Kamera" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Kamera Dokumentasi</h4>
+                                    <p>DSLR Canon EOS untuk dokumentasi kegiatan. Dilengkapi lensa 18-55mm. Total 2 unit.</p>
+                                    <span class="facility-status status-baik">Kondisi: 90% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Speaker Portable -->
+                            <div class="facility-item">
+                                <img src="speaker-portable.jpg" alt="Speaker Portable" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Speaker Portable</h4>
+                                    <p>Bluetooth speaker 20W untuk kegiatan outdoor. Baterai tahan 10 jam. Total 4 unit.</p>
+                                    <span class="facility-status status-baik">Kondisi: 100% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Interactive Whiteboard -->
+                            <div class="facility-item">
+                                <img src="interactive-board.jpg" alt="Interactive Whiteboard" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Papan Tulis Interaktif</h4>
+                                    <p>Smart board 75" dengan touchscreen dan stylus. Untuk pembelajaran digital. Total 3 unit.</p>
+                                    <span class="facility-status status-perbaikan">Kondisi: 80% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Document Camera -->
+                            <div class="facility-item">
+                                <img src="doc-camera.jpg" alt="Document Camera" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Kamera Dokumen</h4>
+                                    <p>Visualizer untuk menampilkan buku/objek ke proyektor. Resolusi Full HD. Total 5 unit.</p>
+                                    <span class="facility-status status-baik">Kondisi: 95% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- UPS -->
+                            <div class="facility-item">
+                                <img src="ups.jpg" alt="UPS" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>UPS</h4>
+                                    <p>Uninterruptible Power Supply untuk server dan komputer penting. Backup 30 menit. Total 8 unit.</p>
+                                    <span class="facility-status status-perbaikan">Kondisi: 65% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Server -->
+                            <div class="facility-item">
+                                <img src="server.jpg" alt="Server" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Server</h4>
+                                    <p>Dell PowerEdge untuk hosting aplikasi dan data bimbel. Kapasitas 16TB. Total 1 unit.</p>
+                                    <span class="facility-status status-baik">Kondisi: 100% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- VR Headset -->
+                            <div class="facility-item">
+                                <img src="vr-headset.jpg" alt="VR Headset" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>VR Headset</h4>
+                                    <p>Oculus Quest 2 untuk pembelajaran imersif. Dilengkapi konten edukasi. Total 5 unit.</p>
+                                    <span class="facility-status status-perbaikan">Kondisi: 75% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- CCTV -->
+                            <div class="facility-item">
+                                <img src="cctv.jpg" alt="CCTV" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Kamera CCTV</h4>
+                                    <p>Sistem pengawasan 24 jam dengan resolusi 4MP. Mencakup semua area penting. Total 12 unit.</p>
+                                    <span class="facility-status status-baik">Kondisi: 90% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Mesin Absensi -->
+                            <div class="facility-item">
+                                <img src="absensi.jpg" alt="Mesin Absensi" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Mesin Absensi</h4>
+                                    <p>Sistem fingerprint untuk presensi staf dan siswa. Terintegrasi dengan database. Total 3 unit.</p>
+                                    <span class="facility-status status-baik">Kondisi: 100% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Kalkulator Ilmiah -->
+                            <div class="facility-item">
+                                <img src="kalkulator.jpg" alt="Kalkulator Ilmiah" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Kalkulator Ilmiah</h4>
+                                    <p>Casio fx-991EX untuk pembelajaran matematika dan sains. Total 30 unit.</p>
+                                    <span class="facility-status status-perbaikan">Kondisi: 85% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Mesin Fotokopi -->
+                            <div class="facility-item">
+                                <img src="fotokopi.jpg" alt="Mesin Fotokopi" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Mesin Fotokopi</h4>
+                                    <p>Xerox WorkCentre warna A3 dengan finishing otomatis. Untuk kebutuhan administrasi. Total 2 unit.</p>
+                                    <span class="facility-status status-rusak">Kondisi: 50% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Charging Station -->
+                            <div class="facility-item">
+                                <img src="charging-station.jpg" alt="Charging Station" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Charging Station</h4>
+                                    <p>Stasiun pengisian daya 10 port untuk perangkat mobile. Anti-surge protection. Total 5 unit.</p>
+                                    <span class="facility-status status-baik">Kondisi: 100% Baik</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Projector Screen -->
+                            <div class="facility-item">
+                                <img src="projector-screen.jpg" alt="Projector Screen" class="facility-img">
+                                <div class="facility-info">
+                                    <h4>Layar Proyektor</h4>
+                                    <p>Layar elektrik 120" dengan remote control. Untuk ruang presentasi. Total 10 unit.</p>
+                                    <span class="facility-status status-perbaikan">Kondisi: 80% Baik</span>
+                                </div>
+                            </div>
+                             
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar"></i> Statistik Kondisi Peralatan Elektronik
+                    </div>
+                    <div class="card-body">
+                        <canvas id="electronicsChart" height="150"></canvas>
+                        <div class="stats" style="margin-top: 20px;">
+                            <div class="stat-card">
+                                <h3>24</h3>
+                                <p>Jenis Peralatan</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>185</h3>
+                                <p>Total Unit</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>12</h3>
+                                <p>Proyektor</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>82%</h3>
+                                <p>Kondisi Baik</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

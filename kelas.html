@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIM Sarana Prasarana Bimbel</title>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4fc3f7;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 1.5rem;
+        }
+
+        .sidebar {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .sidebar ul li a {
+            color: var(--dark-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+
+        .sidebar ul li a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar ul li a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .main-content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .page-header h2 {
+            color: var(--secondary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        table th, table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        table th {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+
+        table tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .badge-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            transition: border-color 0.15s;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(79, 195, 247, 0.25);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+            overflow-y: auto;
+        }
+
+        .modal-dialog {
+            max-width: 600px;
+            margin: 1.75rem auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            padding: 1rem;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h5 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .modal-body {
+            padding: 1rem;
+        }
+
+        .modal-footer {
+            padding: 1rem;
+            border-top: 1px solid #dee2e6;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .close {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: #000;
+            opacity: 0.5;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            opacity: 0.75;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1rem 1.5rem;
+            background-color: var(--light-color);
+            border-bottom: 1px solid #eee;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: #6c757d;
+            font-size: 0.875rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-item input {
+            margin-right: 0.5rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .facility-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .facility-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .facility-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .facility-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .facility-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .facility-info {
+            padding: 1rem;
+        }
+
+        .facility-info h4 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .facility-info p {
+            color: #6c757d;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .facility-status {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-baik {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-perbaikan {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-rusak {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        @media (max-width: 992px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .facility-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .facility-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo Bimbel">
+            <h1>SIM Sarana Prasarana Bimbel Uciha Clan</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" id="navLiveChat"><i class="fas fa-comment-dots"></i> Live Chat</a></li>
+                <li><a href="sim.html" id="navKeluar"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="dashboard">
+            <div class="sidebar">
+                <h3>Menu</h3>
+                <ul>
+                    <li><a href="sim.html" id="menuDashboard" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="kelas.html" id="menuRuang"><i class="fas fa-building"></i> Ruang Kelas</a></li>
+                    <li><a href="perabotan.html" id="menuPerabotan"><i class="fas fa-chair"></i> Perabotan</a></li>
+                    <li><a href="elektronik.html" id="menuElektronik"><i class="fas fa-laptop"></i> Peralatan Elektronik</a></li>
+                    <li><a href="bahanajar.html" id="menuBahanAjar"><i class="fas fa-book"></i> Bahan Ajar</a></li>
+                    
+                    
+                    
+                </ul>
+            </div>
+
+            <div class="main-content">
+                <!-- Dashboard Content -->
+
+              
+                  <div class="card">
+                      <div class="card-header">
+                          <i class="fas fa-building"></i> Daftar Ruang Kelas Bimbel Uciha Clan
+                      </div>
+                      <div class="card-body">
+                          <div class="facility-gallery">
+                              <!-- Kelas 1 -->
+                              <div class="facility-item">
+                                  <img src="A1.png" alt="Kelas A1" class="facility-img">
+                                  <div class="facility-info">
+                                      <h4>Kelas A1</h4>
+                                      <p>Ruangan untuk siswa SD kelas 1-3 dengan kapasitas 15 siswa. Dilengkapi AC, whiteboard, dan meja kursi ergonomis.</p>
+                                      <span class="facility-status status-baik">Kondisi: Baik</span>
+                                  </div>
+                              </div>
+                              
+                              <!-- Kelas 2 -->
+                              <div class="facility-item">
+                                  <img src="A2.png" alt="Kelas A2" class="facility-img">
+                                  <div class="facility-info">
+                                      <h4>Kelas A2</h4>
+                                      <p>Ruangan untuk siswa SD kelas 4-6 dengan kapasitas 15 siswa. Terdapat proyektor dan sound system untuk multimedia learning.</p>
+                                      <span class="facility-status status-baik">Kondisi: Baik</span>
+                                  </div>
+                              </div>
+                              
+                              <!-- Kelas 3 -->
+                              <div class="facility-item">
+                                  <img src="A3.png" alt="Kelas A3" class="facility-img">
+                                  <div class="facility-info">
+                                      <h4>Kelas A3</h4>
+                                      <p>Ruangan khusus matematika SMP dengan kapasitas 12 siswa. Dilengkapi smart board dan perangkat visualisasi 3D.</p>
+                                      <span class="facility-status status-baik">Kondisi: Baik</span>
+                                  </div>
+                              </div>
+                              
+                              <!-- Kelas 4 -->
+                              <div class="facility-item">
+                                  <img src="B1.png" alt="Kelas B1" class="facility-img">
+                                  <div class="facility-info">
+                                      <h4>Kelas B1</h4>
+                                      <p>Laboratorium bahasa untuk persiapan ujian bahasa Inggris. Kapasitas 10 siswa dengan sistem audio digital.</p>
+                                      <span class="facility-status status-perbaikan">Kondisi: Baik</span>
+                                  </div>
+                              </div>
+                              
+                              <!-- Kelas 5 -->
+                              <div class="facility-item">
+                                  <img src="B2.png" alt="Kelas B2" class="facility-img">
+                                  <div class="facility-info">
+                                      <h4>Kelas B2</h4>
+                                      <p>Ruangan fisika SMA dengan berbagai alat peraga dan eksperimen. Kapasitas 10 siswa dengan meja laboratorium.</p>
+                                      <span class="facility-status status-baik">Kondisi: Baik</span>
+                                  </div>
+                              </div>
+                              
+                              <!-- Kelas 6 -->
+                              <div class="facility-item">
+                                  <img src="b3.png" alt="Kelas B3" class="facility-img">
+                                  <div class="facility-info">
+                                      <h4>Kelas B3</h4>
+                                      <p>Ruangan diskusi kelompok untuk persiapan SBMPTN. Kapasitas 8 siswa dengan meja bundar dan LCD screen.</p>
+                                      <span class="facility-status status-baik">Kondisi: Baik</span>
+                                  </div>
+                              </div>
+                              
+                              <!-- Kelas 7 -->
+                              <div class="facility-item">
+                                  <img src="C1.png" alt="Kelas C1" class="facility-img">
+                                  <div class="facility-info">
+                                      <h4>Kelas C1</h4>
+                                      <p>Ruangan privat 1-on-1 untuk konsultasi belajar. Dilengkapi dengan fasilitas rekam sesi belajar.</p>
+                                      <span class="facility-status status-baik">Kondisi: Baik</span>
+                                  </div>
+                              </div>
+                              
+                              <!-- Kelas 8 -->
+                              <div class="facility-item">
+                                  <img src="C2.png" alt="Kelas C2" class="facility-img">
+                                  <div class="facility-info">
+                                      <h4>Kelas C2</h4>
+                                      <p>Ruangan komputer untuk belajar pemrograman. Terdapat 10 unit PC dengan spesifikasi tinggi.</p>
+                                      <span class="facility-status status-rusak">Kondisi: Rusak</span>
+                                  </div>
+                              </div>
+                              
+                              <!-- Kelas 9 -->
+                              <div class="facility-item">
+                                  <img src="C3.png" alt="Kelas C3" class="facility-img">
+                                  <div class="facility-info">
+                                      <h4>Kelas C3</h4>
+                                      <p>Ruangan seni dan kreativitas untuk ekstrakurikuler. Dilengkapi berbagai alat peraga visual.</p>
+                                      <span class="facility-status status-baik">Kondisi: Baik</span>
+                                  </div>
+                              </div>
+                              
+                              <!-- Kelas 10 -->
+                              <div class="facility-item">
+                                  <img src="D1.png" alt="Kelas D1" class="facility-img">
+                                  <div class="facility-info">
+                                      <h4>Kelas D1</h4>
+                                      <p>Ruangan try out dengan sistem UTBK digital. Kapasitas 20 siswa dengan komputer khusus.</p>
+                                      <span class="facility-status status-baik">Kondisi: Baik</span>
+                                  </div>
+                              </div>
+                              
+                              <!-- Kelas 11 -->
+                              <div class="facility-item">
+                                  <img src="D2.png" alt="Kelas D2" class="facility-img">
+                                  <div class="facility-info">
+                                      <h4>Kelas D2</h4>
+                                      <p>Ruangan presentasi untuk public speaking training. Dilengkapi panggung kecil dan perekam video.</p>
+                                      <span class="facility-status status-perbaikan">Kondisi: Perlu Perbaikan</span>
+                                  </div>
+                              </div>
+                              
+                              <!-- Kelas 12 -->
+                              <div class="facility-item">
+                                  <img src="D3.png" alt="Kelas D3" class="facility-img">
+                                  <div class="facility-info">
+                                      <h4>Kelas D3</h4>
+                                      <p>Ruangan serbaguna untuk seminar dan workshop orang tua. Kapasitas 30 orang dengan sistem audio profesional.</p>
+                                      <span class="facility-status status-baik">Kondisi: Baik</span>
+                                  </div>
+                              </div>
+                              
+                          </div>
+                      </div>
+                  </div>
+              
+                  <div class="card">
+                      <div class="card-header">
+                          <i class="fas fa-chart-pie"></i> Statistik Ruang Kelas
+                      </div>
+                        <div class="card-body">
+                        <canvas id="electronicsChart" height="150"></canvas>
+                        <div class="stats" style="margin-top: 20px;">
+                            <div class="stat-card">
+                                <h3>12</h3>
+                                <p>Total Kelas</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>9</h3>
+                                <p>Kondisi Baik</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>2</h3>
+                                <p>Perlu Perbaikan</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>1</h3>
+                                <p>Kelas Rusak</p>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+              </body>

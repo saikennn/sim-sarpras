@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIM Sarana Prasarana Bimbel</title>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4fc3f7;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fffdfd;
+            color: #333;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 1.5rem;
+        }
+
+        .sidebar {
+            background-color: rgb(254, 253, 253);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .sidebar ul li a {
+            color: var(--dark-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+
+        .sidebar ul li a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar ul li a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .main-content {
+            background-color: rgb(253, 252, 252);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .page-header h2 {
+            color: var(--secondary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        table th, table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        table th {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+
+        table tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .badge-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            transition: border-color 0.15s;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(79, 195, 247, 0.25);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+            overflow-y: auto;
+        }
+
+        .modal-dialog {
+            max-width: 600px;
+            margin: 1.75rem auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            padding: 1rem;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h5 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .modal-body {
+            padding: 1rem;
+        }
+
+        .modal-footer {
+            padding: 1rem;
+            border-top: 1px solid #dee2e6;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .close {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: #000;
+            opacity: 0.5;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            opacity: 0.75;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1rem 1.5rem;
+            background-color: var(--light-color);
+            border-bottom: 1px solid #eee;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: #6c757d;
+            font-size: 0.875rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-item input {
+            margin-right: 0.5rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .facility-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .facility-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .facility-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .facility-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .facility-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .facility-info {
+            padding: 1rem;
+        }
+
+        .facility-info h4 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .facility-info p {
+            color: #6c757d;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .facility-status {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-baik {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-perbaikan {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-rusak {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        @media (max-width: 992px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .facility-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .facility-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo Bimbel">
+            <h1>SIM Sarana Prasarana Bimbel Uciha Clan</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" id="navLiveChat"><i class="fas fa-comment-dots"></i> Live Chat</a></li>
+                <li><a href="sim.html" id="navKeluar"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
+               
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="dashboard">
+            <div class="sidebar">
+                <h3>Menu</h3>
+                <ul>
+                    <li><a href="sim.html" id="menuDashboard" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="kelas.html" id="menuRuang"><i class="fas fa-building"></i> Ruang Kelas</a></li>
+                    <li><a href="perabotan.html" id="menuPerabotan"><i class="fas fa-chair"></i> Perabotan</a></li>
+                    <li><a href="elektronik.html" id="menuElektronik"><i class="fas fa-laptop"></i> Peralatan Elektronik</a></li>
+                    <li><a href="bahanajar.html " id="menuBahanAjar"><i class="fas fa-book"></i> Bahan Ajar</a></li>
+
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+
+            <div class="main-content">
+                <!-- Dashboard Content -->
+                <div id="dashboardContent">
+                    <div class="page-header">
+                        <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+                    </div>
+
+                    <div class="stats">
+                        <div class="stat-card">
+                            <h3 id="totalRuang">12</h3>
+                            <p>Ruang Kelas</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="totalPerabotan">247</h3>
+                            <p>Perabotan</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="totalElektronik">28</h3>
+                            <p>Peralatan Elektronik</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="totalBahanAjar">120</h3>
+                            <p>Bahan Ajar</p>
+                        </div>
+                        
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-chart-line"></i> Statistik Fasilitas
+                        </div>
+                        <div class="card-body">
+                            <canvas id="facilityChart" height="150"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-exclamation-triangle"></i> Fasilitas Perlu Perhatian
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Fasilitas</th>
+                                            <th>Jenis</th>
+                                            <th>Status</th>
+                                            <th>Keterangan</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="urgentFacilities">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>AC Ruang B1</td>
+                                            <td>Peralatan Elektronik</td>
+                                            <td><span class="badge badge-warning">Perlu Perbaikan</span></td>
+                                            <td>Tidak dingin</td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Pintu Ruang B2</td>
+                                            <td>Perabotan</td>
+                                            <td><span class="badge badge-danger">Rusak</span></td>
+                                            <td>Meja Guru Rusak</td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Proyektor Ruang A3</td>
+                                            <td>Peralatan Elektronik</td>
+                                            <td><span class="badge badge-warning">Perlu Perbaikan</span></td>
+                                            <td>Printer Rusak</td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ruang Kelas Content -->
+                <div id="ruangContent" class="hidden">
+                    <div class="page-header">
+                        <h2><i class="fas fa-building"></i> Daftar Ruang Kelas</h2>
+                        <button class="btn btn-primary" onclick="openModal('ruangModal')"><i class="fas fa-plus"></i> Tambah Ruang</button>
+                    </div>
+
+                    <div class="stats">
+                        <div class="stat-card">
+                            <h3 id="totalRuangKelas">12</h3>
+                            <p>Total Ruang</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="ruangBaik">8</h3>
+                            <p>Ruang Baik</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="ruangPerbaikan">3</h3>
+                            <p>Perlu Perbaikan</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="ruangRusak">1</h3>
+                            <p>Ruang Rusak</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-filter"></i> Filter Pencarian
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="searchRuang">Cari Ruang Kelas:</label>
+                                <input type="text" id="searchRuang" class="form-control" placeholder="Masukkan nama ruang...">
+                            </div>
+                            <div class="form-group">
+                                <label for="statusRuangFilter">Status Ruang:</label>
+                                <select id="statusRuangFilter" class="form-control">
+                                    <option value="">Semua Status</option>
+                                    <option value="baik">Baik</option>
+                                    <option value="perbaikan">Perlu Perbaikan</option>
+                                    <option value="rusak">Rusak</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary" onclick="filterRuang()"><i class="fas fa-search"></i> Cari</button>
+                        </div>
+                    </div>
+
+                    <!-- Gallery View -->
+                    <div class="facility-gallery" id="ruangGallery">
+                        <!-- Data akan diisi oleh JavaScript -->
+                    </div>
+
+                    <!-- Table View (Hidden by default) -->
+                    <div class="table-responsive hidden" id="ruangTableView">
+                        <table id="ruangTable">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Ruang</th>
+                                    <th>Kapasitas</th>
+                                    <th>Fasilitas</th>
+                                    <th>Status</th>
+                                    <th>Keterangan</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ruangList">
+                                <!-- Data akan diisi oleh JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <button class="btn btn-secondary" onclick="toggleView('ruang')">
+                            <i class="fas fa-exchange-alt"></i> Toggle Tampilan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Perabotan Content -->
+                <div id="perabotanContent" class="hidden">
+                    <div class="page-header">
+                        <h2><i class="fas fa-chair"></i> Daftar Perabotan</h2>
+                        <button class="btn btn-primary" onclick="openModal('perabotanModal')"><i class="fas fa-plus"></i> Tambah Perabotan</button>
+                    </div>
+
+                    <div class="stats">
+                        <div class="stat-card">
+                            <h3 id="totalPerabotanCount">45</h3>
+                            <p>Total Perabotan</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="perabotanBaik">38</h3>
+                            <p>Kondisi Baik</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="perabotanPerbaikan">5</h3>
+                            <p>Perlu Perbaikan</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="perabotanRusak">2</h3>
+                            <p>Rusak</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-filter"></i> Filter Pencarian
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="searchPerabotan">Cari Perabotan:</label>
+                                <input type="text" id="searchPerabotan" class="form-control" placeholder="Masukkan nama perabotan...">
+                            </div>
+                            <div class="form-group">
+                                <label for="jenisPerabotanFilter">Jenis Perabotan:</label>
+                                <select id="jenisPerabotanFilter" class="form-control">
+                                    <option value="">Semua Jenis</option>
+                                    <option value="kursi">Kursi</option>
+                                    <option value="meja">Meja</option>
+                                    <option value="lemari">Lemari</option>
+                                    <option value="papan tulis">Papan Tulis</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="statusPerabotanFilter">Status:</label>
+                                <select id="statusPerabotanFilter" class="form-control">
+                                    <option value="">Semua Status</option>
+                                    <option value="baik">Baik</option>
+                                    <option value="perbaikan">Perlu Perbaikan</option>
+                                    <option value="rusak">Rusak</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary" onclick="filterPerabotan()"><i class="fas fa-search"></i> Cari</button>
+                        </div>
+                    </div>
+
+                    <!-- Gallery View -->
+                    <div class="facility-gallery" id="perabotanGallery">
+                        <!-- Data akan diisi oleh JavaScript -->
+                    </div>
+
+                    <!-- Table View (Hidden by default) -->
+                    <div class="table-responsive hidden" id="perabotanTableView">
+                        <table id="perabotanTable">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Perabotan</th>
+                                    <th>Jenis</th>
+                                    <th>Lokasi</th>
+                                    <th>Jumlah</th>
+                                    <th>Status</th>
+                                    <th>Keterangan</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="perabotanList">
+                                <!-- Data akan diisi oleh JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <button class="btn btn-secondary" onclick="toggleView('perabotan')">
+                            <i class="fas fa-exchange-alt"></i> Toggle Tampilan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Peralatan Elektronik Content -->
+                <div id="elektronikContent" class="hidden">
+                    <div class="page-header">
+                        <h2><i class="fas fa-laptop"></i> Daftar Peralatan Elektronik</h2>
+                        <button class="btn btn-primary" onclick="openModal('elektronikModal')"><i class="fas fa-plus"></i> Tambah Peralatan</button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Peralatan Elektronik" class="facility-image">
+                            <p>Modul peralatan elektronik akan segera tersedia. Fitur ini sedang dalam pengembangan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bahan Ajar Content -->
+                <div id="bahanAjarContent" class="hidden">
+                    <div class="page-header">
+                        <h2><i class="fas fa-book"></i> Daftar Bahan Ajar</h2>
+                        <button class="btn btn-primary" onclick="openModal('bahanAjarModal')"><i class="fas fa-plus"></i> Tambah Bahan Ajar</button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bahan Ajar" class="facility-image">
+                            <p>Modul bahan ajar akan segera tersedia. Fitur ini sedang dalam pengembangan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alat Tulis Content -->
+                <div id="alatTulisContent" class="hidden">
+                    <div class="page-header">
+                        <h2><i class="fas fa-tools"></i> Daftar Alat Tulis</h2>
+                        <button class="btn btn-primary" onclick="openModal('alatTulisModal')"><i class="fas fa-plus"></i> Tambah Alat Tulis</button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Alat Tulis" class="facility-image">
+                            <p>Modul alat tulis akan segera tersedia. Fitur ini sedang dalam pengembangan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <!-- Pengaturan Content -->
+             
+
+    <!-- Modal Tambah Ruang -->
+    <div id="ruangModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h5 id="ruangModalTitle">Tambah Ruang Kelas Baru</h5>
+                <button class="close" onclick="closeModal('ruangModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="ruangForm">
+                    <input type="hidden" id="ruangId">
+                    <div class="form-group">
+                        <label for="namaRuang">Nama Ruang:</label>
+                        <input type="text" id="namaRuang" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="kapasitasRuang">Kapasitas:</label>
+                        <input type="number" id="kapasitasRuang" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fotoRuang">Foto Ruang:</label>
+                        <input type="file" id="fotoRuang" class="form-control" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label>Fasilitas:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fasilitasAC" name="fasilitas" value="AC">
+                                <label for="fasilitasAC">AC</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fasilitasProyektor" name="fasilitas" value="Proyektor">
+                                <label for="fasilitasProyektor">Proyektor</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fasilitasPapanTulis" name="fasilitas" value="Papan Tulis">
+                                <label for="fasilitasPapanTulis">Papan Tulis</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fasilitasSoundSystem" name="fasilitas" value="Sound System">
+                                <label for="fasilitasSoundSystem">Sound System</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fasilitasKursiSiswa" name="fasilitas" value="Kursi Siswa">
+                                <label for="fasilitasKursiSiswa">Kursi Siswa</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fasilitasMejaSiswa" name="fasilitas" value="Meja Siswa">
+                                <label for="fasilitasMejaSiswa">Meja Siswa</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="statusRuang">Status:</label>
+                        <select id="statusRuang" class="form-control" required>
+                            <option value="baik">Baik</option>
+                            <option value="perbaikan">Perlu Perbaikan</option>
+                            <option value="rusak">Rusak</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="keteranganRuang">Keterangan:</label>
+                        <textarea id="keteranganRuang" class="form-control" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('ruangModal')">Batal</button>
+                <button class="btn btn-primary" onclick="simpanRuang()">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tambah Perabotan -->
+    <div id="perabotanModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h5 id="perabotanModalTitle">Tambah Perabotan Baru</h5>
+                <button class="close" onclick="closeModal('perabotanModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="perabotanForm">
+                    <input type="hidden" id="perabotanId">
+                    <div class="form-group">
+                        <label for="namaPerabotan">Nama Perabotan:</label>
+                        <input type="text" id="namaPerabotan" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jenisPerabotan">Jenis:</label>
+                        <select id="jenisPerabotan" class="form-control" required>
+                            <option value="kursi">Kursi</option>
+                            <option value="meja">Meja</option>
+                            <option value="lemari">Lemari</option>
+                            <option value="papan tulis">Papan Tulis</option>
+                            <option value="lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fotoPerabotan">Foto Perabotan:</label>
+                        <input type="file" id="fotoPerabotan" class="form-control" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="lokasiPerabotan">Lokasi:</label>
+                        <input type="text" id="lokasiPerabotan" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jumlahPerabotan">Jumlah:</label>
+                        <input type="number" id="jumlahPerabotan" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="statusPerabotan">Status:</label>
+                        <select id="statusPerabotan" class="form-control" required>
+                            <option value="baik">Baik</option>
+                            <option value="perbaikan">Perlu Perbaikan</option>
+                            <option value="rusak">Rusak</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="keteranganPerabotan">Keterangan:</label>
+                        <textarea id="keteranganPerabotan" class="form-control" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('perabotanModal')">Batal</button>
+                <button class="btn btn-primary" onclick="simpanPerabotan()">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Konfirmasi Hapus Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-dialog" style="max-width: 400px;">
+            <div class="modal-header">
+                <h5 id="confirmModalTitle">Konfirmasi</h5>
+                <button class="close" onclick="closeModal('confirmModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Apakah Anda yakin ingin menghapus data ini?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('confirmModal')">Batal</button>
+                <button class="btn btn-danger" onclick="confirmAction()">Ya, Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        
+        // Data dummy untuk simulasi
+        let ruangData = [
+            { 
+                id: 1, 
+                nama: "Ruang A1", 
+                kapasitas: "20 siswa", 
+                fasilitas: ["AC", "Proyektor", "Papan Tulis"], 
+                status: "baik", 
+                keterangan: "",
+                foto: "https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            { 
+                id: 2, 
+                nama: "Ruang A2", 
+                kapasitas: "15 siswa", 
+                fasilitas: ["AC", "Papan Tulis"], 
+                status: "baik", 
+                keterangan: "",
+                foto: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            { 
+                id: 3, 
+                nama: "Ruang B1", 
+                kapasitas: "25 siswa", 
+                fasilitas: ["AC", "Proyektor", "Papan Tulis", "Sound System"], 
+                status: "perbaikan", 
+                keterangan: "AC tidak dingin",
+                foto: "https://images.unsplash.com/photo-1571260898931-6b5b15838b88?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            { 
+                id: 4, 
+                nama: "Ruang B2", 
+                kapasitas: "18 siswa", 
+                fasilitas: ["AC", "Papan Tulis"], 
+                status: "rusak", 
+                keterangan: "Pintu rusak",
+                foto: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            }
+        ];
+
+        let perabotanData = [
+            { 
+                id: 1, 
+                nama: "Kursi Siswa", 
+                jenis: "kursi", 
+                lokasi: "Ruang A1", 
+                jumlah: 20, 
+                status: "baik", 
+                keterangan: "",
+                foto: "https://images.unsplash.com/photo-1505798577917-a65157d3320a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            { 
+                id: 2, 
+                nama: "Meja Siswa", 
+                jenis: "meja", 
+                lokasi: "Ruang A1", 
+                jumlah: 20, 
+                status: "baik", 
+                keterangan: "",
+                foto: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            { 
+                id: 3, 
+                nama: "Papan Tulis", 
+                jenis: "papan tulis", 
+                lokasi: "Ruang A1", 
+                jumlah: 1, 
+                status: "baik", 
+                keterangan: "",
+                foto: "https://images.unsplash.com/photo-1588072432906-62b6a5b7c1b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            { 
+                id: 4, 
+                nama: "Kursi Guru", 
+                jenis: "kursi", 
+                lokasi: "Ruang A1", 
+                jumlah: 1, 
+                status: "perbaikan", 
+                keterangan: "Kaki kursi goyang",
+                foto: "https://images.unsplash.com/photo-1517705008128-361805f42e86?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            { 
+                id: 5, 
+                nama: "Meja Guru", 
+                jenis: "meja", 
+                lokasi: "Ruang A1", 
+                jumlah: 1, 
+                status: "rusak", 
+                keterangan: "Permukaan meja rusak",
+                foto: "https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            }
+        ];
+
+        // Variabel global untuk konfirmasi
+        let currentAction = null;
+        let currentItemId = null;
+        let currentItemType = null;
+
+        // Inisialisasi chart
+        function initChart() {
+            const ctx = document.getElementById('facilityChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Ruang Kelas', 'Perabotan', 'Peralatan Elektronik', 'Bahan Ajar'],
+                    datasets: [{
+                        label: 'Total',
+                        data: [12, 247, 28, 120],
+                        backgroundColor: [
+                            'rgba(74, 111, 165, 0.7)',
+                            'rgba(22, 96, 136, 0.7)',
+                            'rgba(79, 195, 247, 0.7)',
+                            'rgba(40, 167, 69, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(74, 111, 165, 1)',
+                            'rgba(22, 96, 136, 1)',
+                            'rgba(79, 195, 247, 1)',
+                            'rgba(40, 167, 69, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Fungsi untuk menampilkan konten berdasarkan menu yang dipilih
+        function showContent(contentId) {
+            // Sembunyikan semua konten
+            document.querySelectorAll('.main-content > div').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Tampilkan konten yang dipilih
+            document.getElementById(contentId).classList.remove('hidden');
+            
+            // Update menu aktif di sidebar
+            document.querySelectorAll('.sidebar ul li a').forEach(menu => {
+                menu.classList.remove('active');
+            });
+            
+            // Set menu yang sesuai sebagai aktif
+            document.getElementById('menu' + contentId.replace('Content', '')).classList.add('active');
+            
+            // Jika konten yang ditampilkan memerlukan inisialisasi data
+            if (contentId === 'ruangContent') {
+                loadRuangData();
+            } else if (contentId === 'perabotanContent') {
+                loadPerabotanData();
+            }
+        }
+
+        // Fungsi untuk memuat data ruang ke tabel dan gallery
+        function loadRuangData() {
+            const tbody = document.getElementById('ruangList');
+            const gallery = document.getElementById('ruangGallery');
+            tbody.innerHTML = '';
+            gallery.innerHTML = '';
+            
+            ruangData.forEach((ruang, index) => {
+                // Tambahkan ke tabel
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${ruang.nama}</td>
+                    <td>${ruang.kapasitas}</td>
+                    <td>${ruang.fasilitas.join(', ')}</td>
+                    <td>${getStatusBadge(ruang.status)}</td>
+                    <td>${ruang.keterangan || '-'}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="editRuang(${ruang.id})"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="confirmDelete(${ruang.id}, 'ruang')"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+                
+                // Tambahkan ke gallery
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'facility-item';
+                galleryItem.innerHTML = `
+                    <img src="${ruang.foto}" alt="${ruang.nama}" class="facility-img">
+                    <div class="facility-info">
+                        <h4>${ruang.nama}</h4>
+                        <p><i class="fas fa-users"></i> ${ruang.kapasitas}</p>
+                        <p><i class="fas fa-list"></i> ${ruang.fasilitas.join(', ')}</p>
+                        <span class="facility-status ${getStatusClass(ruang.status)}">${capitalizeFirstLetter(ruang.status)}</span>
+                        <div class="mt-2">
+                            <button class="btn btn-primary btn-sm" onclick="editRuang(${ruang.id})"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-danger btn-sm" onclick="confirmDelete(${ruang.id}, 'ruang')"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+                gallery.appendChild(galleryItem);
+            });
+        }
+
+        // Fungsi untuk memuat data perabotan ke tabel dan gallery
+        function loadPerabotanData() {
+            const tbody = document.getElementById('perabotanList');
+            const gallery = document.getElementById('perabotanGallery');
+            tbody.innerHTML = '';
+            gallery.innerHTML = '';
+            
+            perabotanData.forEach((item, index) => {
+                // Tambahkan ke tabel
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${item.nama}</td>
+                    <td>${capitalizeFirstLetter(item.jenis)}</td>
+                    <td>${item.lokasi}</td>
+                    <td>${item.jumlah}</td>
+                    <td>${getStatusBadge(item.status)}</td>
+                    <td>${item.keterangan || '-'}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="editPerabotan(${item.id})"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="confirmDelete(${item.id}, 'perabotan')"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+                
+                // Tambahkan ke gallery
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'facility-item';
+                galleryItem.innerHTML = `
+                    <img src="${item.foto}" alt="${item.nama}" class="facility-img">
+                    <div class="facility-info">
+                        <h4>${item.nama}</h4>
+                        <p><i class="fas fa-tag"></i> ${capitalizeFirstLetter(item.jenis)}</p>
+                        <p><i class="fas fa-map-marker-alt"></i> ${item.lokasi}</p>
+                        <p><i class="fas fa-hashtag"></i> Jumlah: ${item.jumlah}</p>
+                        <span class="facility-status ${getStatusClass(item.status)}">${capitalizeFirstLetter(item.status)}</span>
+                        <div class="mt-2">
+                            <button class="btn btn-primary btn-sm" onclick="editPerabotan(${item.id})"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-danger btn-sm" onclick="confirmDelete(${item.id}, 'perabotan')"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+                gallery.appendChild(galleryItem);
+            });
+        }
+
+        // Fungsi untuk mendapatkan badge status
+        function getStatusBadge(status) {
+            switch(status) {
+                case 'baik':
+                    return '<span class="badge badge-success">Baik</span>';
+                case 'perbaikan':
+                    return '<span class="badge badge-warning">Perlu Perbaikan</span>';
+                case 'rusak':
+                    return '<span class="badge badge-danger">Rusak</span>';
+                default:
+                    return '<span class="badge">Unknown</span>';
+            }
+        }
+
+        // Fungsi untuk mendapatkan class status
+        function getStatusClass(status) {
+            switch(status) {
+                case 'baik':
+                    return 'status-baik';
+                case 'perbaikan':
+                    return 'status-perbaikan';
+                case 'rusak':
+                    return 'status-rusak';
+                default:
+                    return '';
+            }
+        }
+
+        // Fungsi untuk membuka modal
+        function openModal(modalId, title = null) {
+            if (title && modalId === 'ruangModal') {
+                document.getElementById('ruangModalTitle').textContent = title;
+            } else if (title && modalId === 'perabotanModal') {
+                document.getElementById('perabotanModalTitle').textContent = title;
+            }
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        // Fungsi untuk menutup modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Fungsi untuk menyimpan data ruang
+        function simpanRuang() {
+            const id = document.getElementById('ruangId').value;
+            const nama = document.getElementById('namaRuang').value;
+            const kapasitas = document.getElementById('kapasitasRuang').value;
+            const status = document.getElementById('statusRuang').value;
+            const keterangan = document.getElementById('keteranganRuang').value;
+            const fotoInput = document.getElementById('fotoRuang');
+            
+            // Dapatkan fasilitas yang dipilih
+            const fasilitasCheckboxes = document.querySelectorAll('#ruangForm input[name="fasilitas"]:checked');
+            const fasilitas = Array.from(fasilitasCheckboxes).map(cb => cb.value);
+            
+            if (!nama || !kapasitas) {
+                alert('Nama ruang dan kapasitas harus diisi!');
+                return;
+            }
+            
+            // Gunakan foto default jika tidak ada yang diupload
+            let foto = "https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
+            
+            if (id) {
+                // Edit data yang ada
+                const index = ruangData.findIndex(r => r.id == id);
+                if (index !== -1) {
+                    // Pertahankan foto lama jika tidak ada upload baru
+                    if (fotoInput.files.length === 0) {
+                        foto = ruangData[index].foto;
+                    }
+                    
+                    ruangData[index] = {
+                        id: parseInt(id),
+                        nama,
+                        kapasitas: kapasitas + ' siswa',
+                        fasilitas,
+                        status,
+                        keterangan,
+                        foto
+                    };
+                }
+            } else {
+                // Tambah data baru
+                const newId = ruangData.length > 0 ? Math.max(...ruangData.map(r => r.id)) + 1 : 1;
+                ruangData.push({
+                    id: newId,
+                    nama,
+                    kapasitas: kapasitas + ' siswa',
+                    fasilitas,
+                    status,
+                    keterangan,
+                    foto
+                });
+            }
+            
+            // Reset form dan tutup modal
+            document.getElementById('ruangForm').reset();
+            closeModal('ruangModal');
+            
+            // Perbarui tabel dan gallery
+            loadRuangData();
+            
+            // Perbarui statistik
+            updateRuangStats();
+        }
+
+        // Fungsi untuk menyimpan data perabotan
+        function simpanPerabotan() {
+            const id = document.getElementById('perabotanId').value;
+            const nama = document.getElementById('namaPerabotan').value;
+            const jenis = document.getElementById('jenisPerabotan').value;
+            const lokasi = document.getElementById('lokasiPerabotan').value;
+            const jumlah = document.getElementById('jumlahPerabotan').value;
+            const status = document.getElementById('statusPerabotan').value;
+            const keterangan = document.getElementById('keteranganPerabotan').value;
+            const fotoInput = document.getElementById('fotoPerabotan');
+            
+            if (!nama || !jenis || !lokasi || !jumlah) {
+                alert('Semua field harus diisi kecuali keterangan!');
+                return;
+            }
+            
+            // Gunakan foto default jika tidak ada yang diupload
+            let foto = "https://images.unsplash.com/photo-1505798577917-a65157d3320a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
+            
+            if (id) {
+                // Edit data yang ada
+                const index = perabotanData.findIndex(p => p.id == id);
+                if (index !== -1) {
+                    // Pertahankan foto lama jika tidak ada upload baru
+                    if (fotoInput.files.length === 0) {
+                        foto = perabotanData[index].foto;
+                    }
+                    
+                    perabotanData[index] = {
+                        id: parseInt(id),
+                        nama,
+                        jenis,
+                        lokasi,
+                        jumlah: parseInt(jumlah),
+                        status,
+                        keterangan,
+                        foto
+                    };
+                }
+            } else {
+                // Tambah data baru
+                const newId = perabotanData.length > 0 ? Math.max(...perabotanData.map(p => p.id)) + 1 : 1;
+                perabotanData.push({
+                    id: newId,
+                    nama,
+                    jenis,
+                    lokasi,
+                    jumlah: parseInt(jumlah),
+                    status,
+                    keterangan,
+                    foto
+                });
+            }
+            
+            // Reset form dan tutup modal
+            document.getElementById('perabotanForm').reset();
+            closeModal('perabotanModal');
+            
+            // Perbarui tabel dan gallery
+            loadPerabotanData();
+            
+            // Perbarui statistik
+            updatePerabotanStats();
+        }
+
+        // Fungsi untuk mengedit ruang
+        function editRuang(id) {
+            const ruang = ruangData.find(r => r.id == id);
+            if (!ruang) return;
+            
+            document.getElementById('ruangId').value = ruang.id;
+            document.getElementById('namaRuang').value = ruang.nama;
+            document.getElementById('kapasitasRuang').value = parseInt(ruang.kapasitas);
+            document.getElementById('statusRuang').value = ruang.status;
+            document.getElementById('keteranganRuang').value = ruang.keterangan || '';
+            
+            // Reset semua checkbox fasilitas
+            document.querySelectorAll('#ruangForm input[name="fasilitas"]').forEach(cb => {
+                cb.checked = false;
+            });
+            
+            // Centang fasilitas yang ada
+            ruang.fasilitas.forEach(f => {
+                const checkbox = document.querySelector(`#ruangForm input[name="fasilitas"][value="${f}"]`);
+                if (checkbox) checkbox.checked = true;
+            });
+            
+            openModal('ruangModal', 'Edit Ruang Kelas');
+        }
+
+        // Fungsi untuk mengedit perabotan
+        function editPerabotan(id) {
+            const perabotan = perabotanData.find(p => p.id == id);
+            if (!perabotan) return;
+            
+            document.getElementById('perabotanId').value = perabotan.id;
+            document.getElementById('namaPerabotan').value = perabotan.nama;
+            document.getElementById('jenisPerabotan').value = perabotan.jenis;
+            document.getElementById('lokasiPerabotan').value = perabotan.lokasi;
+            document.getElementById('jumlahPerabotan').value = perabotan.jumlah;
+            document.getElementById('statusPerabotan').value = perabotan.status;
+            document.getElementById('keteranganPerabotan').value = perabotan.keterangan || '';
+            
+            openModal('perabotanModal', 'Edit Perabotan');
+        }
+
+        // Fungsi untuk konfirmasi penghapusan
+        function confirmDelete(id, type) {
+            currentItemId = id;
+            currentItemType = type;
+            
+            let itemName = '';
+            if (type === 'ruang') {
+                const ruang = ruangData.find(r => r.id == id);
+                itemName = ruang ? ruang.nama : 'item ini';
+            } else if (type === 'perabotan') {
+                const perabotan = perabotanData.find(p => p.id == id);
+                itemName = perabotan ? perabotan.nama : 'item ini';
+            }
+            
+            document.getElementById('confirmMessage').textContent = `Apakah Anda yakin ingin menghapus ${itemName}?`;
+            openModal('confirmModal');
+        }
+
+        // Fungsi untuk mengeksekusi aksi setelah konfirmasi
+        function confirmAction() {
+            if (currentItemType === 'ruang') {
+                // Hapus dari array ruangData
+                ruangData = ruangData.filter(r => r.id != currentItemId);
+                loadRuangData();
+                updateRuangStats();
+            } else if (currentItemType === 'perabotan') {
+                // Hapus dari array perabotanData
+                perabotanData = perabotanData.filter(p => p.id != currentItemId);
+                loadPerabotanData();
+                updatePerabotanStats();
+            }
+            
+            closeModal('confirmModal');
+        }
+
+        // Fungsi untuk memfilter data ruang
+        function filterRuang() {
+            const searchText = document.getElementById('searchRuang').value.toLowerCase();
+            const statusFilter = document.getElementById('statusRuangFilter').value;
+            
+            const filteredData = ruangData.filter(ruang => {
+                const namaMatch = ruang.nama.toLowerCase().includes(searchText);
+                const statusMatch = !statusFilter || ruang.status === statusFilter;
+                return namaMatch && statusMatch;
+            });
+            
+            const tbody = document.getElementById('ruangList');
+            const gallery = document.getElementById('ruangGallery');
+            tbody.innerHTML = '';
+            gallery.innerHTML = '';
+            
+            filteredData.forEach((ruang, index) => {
+                // Tambahkan ke tabel
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${ruang.nama}</td>
+                    <td>${ruang.kapasitas}</td>
+                    <td>${ruang.fasilitas.join(', ')}</td>
+                    <td>${getStatusBadge(ruang.status)}</td>
+                    <td>${ruang.keterangan || '-'}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="editRuang(${ruang.id})"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="confirmDelete(${ruang.id}, 'ruang')"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+                
+                // Tambahkan ke gallery
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'facility-item';
+                galleryItem.innerHTML = `
+                    <img src="${ruang.foto}" alt="${ruang.nama}" class="facility-img">
+                    <div class="facility-info">
+                        <h4>${ruang.nama}</h4>
+                        <p><i class="fas fa-users"></i> ${ruang.kapasitas}</p>
+                        <p><i class="fas fa-list"></i> ${ruang.fasilitas.join(', ')}</p>
+                        <span class="facility-status ${getStatusClass(ruang.status)}">${capitalizeFirstLetter(ruang.status)}</span>
+                        <div class="mt-2">
+                            <button class="btn btn-primary btn-sm" onclick="editRuang(${ruang.id})"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-danger btn-sm" onclick="confirmDelete(${ruang.id}, 'ruang')"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+                gallery.appendChild(galleryItem);
+            });
+        }
+
+        // Fungsi untuk memfilter data perabotan
+        function filterPerabotan() {
+            const searchText = document.getElementById('searchPerabotan').value.toLowerCase();
+            const jenisFilter = document.getElementById('jenisPerabotanFilter').value;
+            const statusFilter = document.getElementById('statusPerabotanFilter').value;
+            
+            const filteredData = perabotanData.filter(perabotan => {
+                const namaMatch = perabotan.nama.toLowerCase().includes(searchText);
+                const jenisMatch = !jenisFilter || perabotan.jenis === jenisFilter;
+                const statusMatch = !statusFilter || perabotan.status === statusFilter;
+                return namaMatch && jenisMatch && statusMatch;
+            });
+            
+            const tbody = document.getElementById('perabotanList');
+            const gallery = document.getElementById('perabotanGallery');
+            tbody.innerHTML = '';
+            gallery.innerHTML = '';
+            
+            filteredData.forEach((perabotan, index) => {
+                // Tambahkan ke tabel
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${perabotan.nama}</td>
+                    <td>${capitalizeFirstLetter(perabotan.jenis)}</td>
+                    <td>${perabotan.lokasi}</td>
+                    <td>${perabotan.jumlah}</td>
+                    <td>${getStatusBadge(perabotan.status)}</td>
+                    <td>${perabotan.keterangan || '-'}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="editPerabotan(${perabotan.id})"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="confirmDelete(${perabotan.id}, 'perabotan')"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+                
+                // Tambahkan ke gallery
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'facility-item';
+                galleryItem.innerHTML = `
+                    <img src="${perabotan.foto}" alt="${perabotan.nama}" class="facility-img">
+                    <div class="facility-info">
+                        <h4>${perabotan.nama}</h4>
+                        <p><i class="fas fa-tag"></i> ${capitalizeFirstLetter(perabotan.jenis)}</p>
+                        <p><i class="fas fa-map-marker-alt"></i> ${perabotan.lokasi}</p>
+                        <p><i class="fas fa-hashtag"></i> Jumlah: ${perabotan.jumlah}</p>
+                        <span class="facility-status ${getStatusClass(perabotan.status)}">${capitalizeFirstLetter(perabotan.status)}</span>
+                        <div class="mt-2">
+                            <button class="btn btn-primary btn-sm" onclick="editPerabotan(${perabotan.id})"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-danger btn-sm" onclick="confirmDelete(${perabotan.id}, 'perabotan')"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+                gallery.appendChild(galleryItem);
+            });
+        }
+
+        // Fungsi untuk mengupdate statistik ruang
+        function updateRuangStats() {
+            const total = ruangData.length;
+            const baik = ruangData.filter(r => r.status === 'baik').length;
+            const perbaikan = ruangData.filter(r => r.status === 'perbaikan').length;
+            const rusak = ruangData.filter(r => r.status === 'rusak').length;
+            
+            document.getElementById('totalRuangKelas').textContent = total;
+            document.getElementById('ruangBaik').textContent = baik;
+            document.getElementById('ruangPerbaikan').textContent = perbaikan;
+            document.getElementById('ruangRusak').textContent = rusak;
+            
+            // Update juga statistik di dashboard
+            document.getElementById('totalRuang').textContent = total;
+        }
+
+        // Fungsi untuk mengupdate statistik perabotan
+        function updatePerabotanStats() {
+            const total = perabotanData.length;
+            const baik = perabotanData.filter(p => p.status === 'baik').length;
+            const perbaikan = perabotanData.filter(p => p.status === 'perbaikan').length;
+            const rusak = perabotanData.filter(p => p.status === 'rusak').length;
+            
+            document.getElementById('totalPerabotanCount').textContent = total;
+            document.getElementById('perabotanBaik').textContent = baik;
+            document.getElementById('perabotanPerbaikan').textContent = perbaikan;
+            document.getElementById('perabotanRusak').textContent = rusak;
+            
+            // Update juga statistik di dashboard
+            document.getElementById('totalPerabotan').textContent = total;
+        }
+
+        // Fungsi untuk toggle antara tampilan tabel dan gallery
+        function toggleView(type) {
+            const tableView = document.getElementById(`${type}TableView`);
+            const galleryView = document.getElementById(`${type}Gallery`);
+            
+            if (tableView.classList.contains('hidden')) {
+                tableView.classList.remove('hidden');
+                galleryView.classList.add('hidden');
+            } else {
+                tableView.classList.add('hidden');
+                galleryView.classList.remove('hidden');
+            }
+        }
+
+        // Fungsi utilitas untuk mengkapitalisasi huruf pertama
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        // Inisialisasi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inisialisasi chart
+            initChart();
+            
+            // Tampilkan konten dashboard secara default
+            showContent('dashboardContent');
+            
+            // Event listeners untuk menu sidebar
+            document.getElementById('menuDashboard').addEventListener('click', function(e) {
+                e.preventDefault();
+                showContent('dashboardContent');
+            });
+            
+            document.getElementById('menuRuang').addEventListener('click', function(e) {
+                e.preventDefault();
+                showContent('ruangContent');
+            });
+            
+            document.getElementById('menuPerabotan').addEventListener('click', function(e) {
+                e.preventDefault();
+                showContent('perabotanContent');
+            });
+            
+            document.getElementById('menuElektronik').addEventListener('click', function(e) {
+                e.preventDefault();
+                showContent('elektronikContent');
+            });
+            
+            document.getElementById('menuBahanAjar').addEventListener('click', function(e) {
+                e.preventDefault();
+                showContent('bahanAjarContent');
+            });
+            
+            document.getElementById('menuAlatTulis').addEventListener('click', function(e) {
+                e.preventDefault();
+                showContent('alatTulisContent');
+            });
+            
+            document.getElementById('menuLaporan').addEventListener('click', function(e) {
+                e.preventDefault();
+                showContent('laporanContent');
+            });
+            
+            document.getElementById('menuPengaturan').addEventListener('click', function(e) {
+                e.preventDefault();
+                showContent('pengaturanContent');
+            });
+            
+            // Event listeners untuk navigasi header
+            document.getElementById('navBeranda').addEventListener('click', function(e) {
+                e.preventDefault();
+                showContent('dashboardContent');
+            });
+            
+            document.getElementById('navProfil').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Halaman Profil akan segera tersedia!');
+            });
+            
+            document.getElementById('navKeluar').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (confirm('Apakah Anda yakin ingin keluar?')) {
+                    alert('Anda telah keluar dari sistem. Arahkan ke halaman login di sini.');
+                    // Dalam aplikasi nyata, ini akan mengarahkan ke halaman login
+                }
+            });
+            
+            // Load data awal
+            loadRuangData();
+            loadPerabotanData();
+            updateRuangStats();
+            updatePerabotanStats();
+        });
+    </script>
+</body>
+</html>
